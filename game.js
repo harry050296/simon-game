@@ -6,7 +6,9 @@ var started = false;
 
 var level = 0;
 
-$("body").keydown(function() {
+$(".play").click(function() {
+    $("#input").fadeOut();
+    $(".play").fadeOut();
     if(!started) {
         $("#level-title").text("Level "+ level);
         newSequence();
@@ -15,7 +17,7 @@ $("body").keydown(function() {
 
 });
 
-$(".btn").click(function() {
+$(".btns").click(function() {
     var userChosenColor = $(this).attr("id");
     userClickedPattern.push(userChosenColor);
     
@@ -43,7 +45,9 @@ function checkAnswer(currentLevel) {
         setTimeout(function() {
             $("body").removeClass("game-over");
         },300);
-        $("#level-title").text("Game Over, Press Any Key to Restart");
+        var name = $("#input").val();
+        $("#level-title").html("User " + name + " has reached till level " + level + "<br /> Press Play to Restart !");
+        
         startOver();
     }
 }
@@ -82,4 +86,6 @@ function startOver() {
     level = 0;
     started = false;
     gamePattern = [];
+    $("#input").fadeIn();
+    $(".play").fadeIn();
 }
